@@ -1,7 +1,7 @@
 {
   "name": "hr",
   "version": "1.0.0",
-  "description": "Monorepo foundation for a role-based HR management system",
+  "description": "Monorepo for a comprehensive HR management system",
   "private": true,
   "workspaces": [
     "backend",
@@ -16,12 +16,7 @@
     "type": "git",
     "url": "https://github.com/krazysoundsproduction-bit/HR.git"
   },
-  "keywords": [
-    "hr",
-    "express",
-    "react",
-    "typescript"
-  ],
+  "keywords": ["hr", "express", "react", "typescript"],
   "author": "",
   "license": "MIT"
 }

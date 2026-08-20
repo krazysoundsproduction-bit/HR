@@ -1,26 +1,20 @@
 {
   "name": "@hr/frontend",
   "version": "1.0.0",
-  "description": "React dashboard foundation for HR staff workflows",
+  "description": "React dashboard for HR staff workflows",
+  "private": true,
+  "type": "module",
   "scripts": {
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc -b && vite build",
     "dev": "vite",
     "preview": "vite preview"
   },
-  "keywords": [
-    "hr",
-    "react",
-    "typescript",
-    "vite"
-  ],
-  "author": "",
-  "license": "MIT",
-  "type": "module",
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
   },
   "devDependencies": {
+    "@types/node": "^24.3.0",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
     "@vitejs/plugin-react": "^5.0.2",

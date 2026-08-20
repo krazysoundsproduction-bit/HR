@@ -1,19 +1,14 @@
 {
   "name": "@hr/backend",
   "version": "1.0.0",
-  "description": "Express API foundation for HR management modules",
+  "description": "Express API for HR management system",
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsx watch src/server.ts",
     "start": "node dist/server.js"
   },
-  "keywords": [
-    "hr",
-    "express",
-    "typescript",
-    "api"
-  ],
+  "keywords": ["hr", "express", "typescript", "api"],
   "author": "",
   "license": "MIT",
   "type": "module",
@@ -25,7 +20,8 @@
     "mongoose": "^8.18.0",
     "morgan": "^1.10.1",
     "mysql2": "^3.15.0",
-    "pg": "^8.16.3"
+    "pg": "^8.16.3",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
