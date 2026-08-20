@@ -1,0 +1,27 @@
+{
+  "name": "hr",
+  "version": "1.0.0",
+  "description": "Monorepo foundation for a role-based HR management system",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace backend && npm run build --workspace frontend",
+    "dev:backend": "npm run dev --workspace backend",
+    "dev:frontend": "npm run dev --workspace frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krazysoundsproduction-bit/HR.git"
+  },
+  "keywords": [
+    "hr",
+    "express",
+    "react",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT"
+}
