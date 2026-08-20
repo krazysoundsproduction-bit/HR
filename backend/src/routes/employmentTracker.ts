@@ -81,9 +81,13 @@ const history = (employeeId: string, eventType: string, details: string, changed
 };
 
 router.get('/contracts', requireRole(['hr', 'manager']), (req, res) => {
-  const status = req.query.status as string | undefined;
-  const employeeId = req.query.employeeId as string | undefined;
-  const department = req.query.department as string | undefined;
+  res.json([...db.contracts.values()]);
+});
+
+router.post('/contracts/search', requireRole(['hr', 'manager']), (req, res) => {
+  const status = req.body.status as string | undefined;
+  const employeeId = req.body.employeeId as string | undefined;
+  const department = req.body.department as string | undefined;
   const records = [...db.contracts.values()].filter((contract) => {
     if (status && contract.status !== status) return false;
     if (employeeId && contract.employeeId !== employeeId) return false;
@@ -281,8 +285,12 @@ router.post('/leave-balances', requireRole(['hr']), (req, res) => {
 });
 
 router.get('/leave-balances', requireRole(['hr', 'manager', 'employee']), (req, res) => {
-  const employeeId = req.query.employeeId as string | undefined;
-  const year = req.query.year ? Number(req.query.year) : undefined;
+  res.json([...db.leaveBalances.values()]);
+});
+
+router.post('/leave-balances/search', requireRole(['hr', 'manager', 'employee']), (req, res) => {
+  const employeeId = req.body.employeeId as string | undefined;
+  const year = req.body.year ? Number(req.body.year) : undefined;
   const records = [...db.leaveBalances.values()].filter((record) => {
     if (employeeId && record.employeeId !== employeeId) return false;
     if (year && record.year !== year) return false;
@@ -336,8 +344,12 @@ router.post('/leave-requests', requireRole(['employee', 'hr']), (req, res) => {
 });
 
 router.get('/leave-requests', requireRole(['hr', 'manager', 'employee']), (req, res) => {
-  const status = req.query.status as string | undefined;
-  const employeeId = req.query.employeeId as string | undefined;
+  res.json([...db.leaveRequests.values()]);
+});
+
+router.post('/leave-requests/search', requireRole(['hr', 'manager', 'employee']), (req, res) => {
+  const status = req.body.status as string | undefined;
+  const employeeId = req.body.employeeId as string | undefined;
   const records = [...db.leaveRequests.values()].filter((item) => {
     if (status && item.status !== status) return false;
     if (employeeId && item.employeeId !== employeeId) return false;
@@ -398,8 +410,11 @@ router.post('/leave-requests/:id/reject', requireRole(['manager', 'hr']), (req, 
   return res.json(updated);
 });
 
-router.get('/employees/:employeeId/employment-summary', requireRole(['hr', 'manager', 'employee']), (req, res) => {
-  const employeeId = req.params.employeeId;
+router.get('/employees/employment-summary', requireRole(['hr', 'manager', 'employee']), (req, res) => {
+  const employeeId = req.header('x-employee-id');
+  if (!employeeId) {
+    return res.status(400).json({ error: 'x-employee-id header is required' });
+  }
   const contracts = [...db.contracts.values()].filter((contract) => contract.employeeId === employeeId);
   const events = [...db.employmentHistory.values()].filter((entry) => entry.employeeId === employeeId);
 
