@@ -1,0 +1,85 @@
+{
+  "collections": {
+    "employees": {
+      "employeeNumber": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "email": "string",
+      "department": "string",
+      "jobTitle": "string",
+      "status": "string",
+      "documents": [
+        {
+          "documentType": "string",
+          "storagePath": "string",
+          "uploadedAt": "date"
+        }
+      ]
+    },
+    "jobPostings": {
+      "title": "string",
+      "department": "string",
+      "status": "string",
+      "postedAt": "date"
+    },
+    "applicants": {
+      "jobPostingId": "objectId",
+      "fullName": "string",
+      "email": "string",
+      "stage": "string",
+      "interviews": [
+        {
+          "scheduledAt": "date",
+          "interviewer": "string",
+          "outcome": "string"
+        }
+      ]
+    },
+    "salaryRecords": {
+      "employeeId": "objectId",
+      "baseSalary": "number",
+      "currency": "string",
+      "effectiveFrom": "date"
+    },
+    "payrollRuns": {
+      "payrollPeriod": "string",
+      "status": "string",
+      "processedAt": "date"
+    },
+    "benefits": {
+      "employeeId": "objectId",
+      "benefitType": "string",
+      "provider": "string"
+    },
+    "timeEntries": {
+      "employeeId": "objectId",
+      "workDate": "date",
+      "hoursWorked": "number"
+    },
+    "leaveRequests": {
+      "employeeId": "objectId",
+      "leaveType": "string",
+      "startDate": "date",
+      "endDate": "date",
+      "status": "string"
+    },
+    "performanceReviews": {
+      "employeeId": "objectId",
+      "reviewPeriod": "string",
+      "rating": "number",
+      "completedAt": "date"
+    },
+    "goals": {
+      "employeeId": "objectId",
+      "title": "string",
+      "status": "string",
+      "dueDate": "date"
+    },
+    "feedbackEntries": {
+      "employeeId": "objectId",
+      "authorName": "string",
+      "submittedAt": "date",
+      "notes": "string"
+    }
+  }
+}
