@@ -1,0 +1,68 @@
+services:
+  api:
+    build:
+      context: ./backend
+    command: npm run dev
+    env_file:
+      - ./.env
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+      - mysql
+      - mongodb
+
+  web:
+    build:
+      context: ./frontend
+    command: npm run dev -- --host 0.0.0.0 --port 5173
+    env_file:
+      - ./.env
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hr}
+      POSTGRES_USER: ${POSTGRES_USER:-hr}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-hrpassword}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  mysql:
+    image: mysql:8.4
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-hr}
+      MYSQL_USER: ${MYSQL_USER:-hr}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-hrpassword}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  mongodb:
+    image: mongo:8
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_INITDB_DATABASE:-hr}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  postgres-data:
+  mysql-data:
+  mongodb-data:
